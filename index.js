@@ -17,3 +17,83 @@ var connection = mysql.createConnection({
     console.log("connected as id " + connection.threadId);
     
   });
+
+  function prompt() {
+    inquirer
+        .prompt([
+            {
+                type: "list",
+                name: "main",
+                message: "What would you like to do",
+                choices: [
+                    "Add a department",
+                    "Add a role",
+                    "Add an employee",
+                    "View departments",
+                    "View roles",
+                    "View employees",
+                    "Update employee roles",
+                    "Exit"]
+            }])
+        .then(function (answer) {
+            switch (answer.main) {
+                case ("Add a department"):
+                    addDepartment();
+                    break;
+                case ("Add a role"):
+                    addRole();
+                    break;
+                case ("Add an employee"):
+                    addEmployee();
+                    break;
+                case ("View departments"):
+                    viewDepartments();
+                    break;
+                case ("View roles"):
+                    viewRoles();
+                    break;
+                case ("View employees"):
+                    viewEmployees();
+                    break;
+                case ("Update employee roles"):
+                    updateRole();
+                    break;
+                case ("Exit"):
+                    connection.end();
+                    break;
+                default:
+                    console.log("fubar")
+                    break;
+            }
+        })
+}
+
+prompt()
+
+function addDepartment() {
+    console.log("adding a department!");
+};
+
+function addRole(){
+    console.log("adding a role!");
+};
+
+function addEmployee() {
+    console.log("adding an employee!");
+};
+
+function viewDepartments() {
+    console.log("viewing departments!");
+};
+
+function viewRoles(){
+    console.log("viewing roles!");
+};
+
+function viewEmployees(){
+    console.log("viewing employees!");
+};
+
+function updateRole(){
+    console.log("updating employee roles!");
+};
