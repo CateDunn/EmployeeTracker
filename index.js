@@ -80,7 +80,10 @@ function addDepartment() {
     ])
 
     .then(function(answer) {
-        console.log(answer)
+        connection.query(`INSERT INTO departments (department_name) VALUES ("${answer.department_name}");`, function(err,res) {
+            if (err) throw err;
+        }
+        )
         prompt()
     })
 
@@ -107,7 +110,10 @@ function addRole(){
     ])
 
     .then(function(answer) {
-        console.log(answer)
+        connection.query(`INSERT INTO roles (title, salary, department_id) VALUES ("${answer.title}", "${answer.salary}", "${answer.department_id}");`, function(err,res) {
+            if (err) throw err;
+        }
+        )
         prompt()
     })
 };
@@ -136,7 +142,10 @@ function addEmployee() {
         }
     ])
     .then(function(answer) {
-        console.log(answer)
+        connection.query(`INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ("${answer.first_name}", "${answer.last_name}", "${answer.role_id}", "${answer.manager_id}");`, function(err,res) {
+            if (err) throw err;
+        }
+        )
         prompt()
     })
 };
