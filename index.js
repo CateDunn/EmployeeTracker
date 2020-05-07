@@ -176,5 +176,47 @@ function viewEmployees(){
 };
 
 function updateRole(){
-    console.log("updating employee roles!");
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "role_id",
+            message: "What is the id of the role that you would like to update?"
+        },
+        {
+            type: "input",
+            name: "newrole_title",
+            message: "What is the new title of the role?"
+        },
+        {
+            type: "input",
+            name: "newrole_salary",
+            message: "What is the new salary for the role?"
+        },
+        {
+            type: "input",
+            name: "newrole_department_id",
+            message: "What is the new id for the role?"
+        }
+
+    ])
+    .then(function(answer) {
+        connection.query(`UPDATE roles SET title = "${answer.newrole_title}", salary = ${answer.newrole_salary}, department_id = ${answer.newrole_department_id} WHERE id = ${answer.role_id};`, function(err,res) {
+            if (err) throw err;
+        }
+        )
+        prompt()
+    })
 };
+
+function deleteDepartment(){
+    // DELETE from employees where id = 1
+
+};
+
+function deleteRole(){
+
+};
+
+function deleteEmployee(){
+
+}
