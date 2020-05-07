@@ -83,15 +83,25 @@ function addEmployee() {
 };
 
 function viewDepartments() {
-    console.log("viewing departments!");
+    connection.query(`SELECT * FROM departments`, function (err, res) {
+        if (err) throw err;
+        console.table(res)
+    })
+
 };
 
 function viewRoles(){
-    console.log("viewing roles!");
+    connection.query(`SELECT * FROM roles`, function (err, res) {
+        if (err) throw err;
+        console.table(res)
+    })
 };
 
 function viewEmployees(){
-    console.log("viewing employees!");
+    connection.query(`SELECT * FROM employees`, function (err, res) {
+        if (err) throw err;
+        console.table(res)
+    })
 };
 
 function updateRole(){
