@@ -71,15 +71,69 @@ var connection = mysql.createConnection({
 prompt()
 
 function addDepartment() {
-    console.log("adding a department!");
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "department_name",
+            message: "What is the name of the department that you would like to add?"
+        }  
+    ])
+
+    .then(function(answer) {
+        console.log(answer)
+    })
 };
 
 function addRole(){
-    console.log("adding a role!");
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "title",
+            message: "What is the title of this role?"
+        },
+        {
+            type: "input",
+            name: "salary",
+            message: "What is the salary for this role?"
+        },
+        {
+            type: "input",
+            name: "department_id",
+            message: "What is the id for the department that this role is in?"
+        }
+    ])
+
+    .then(function(answer) {
+        console.log(answer)
+    })
 };
 
 function addEmployee() {
-    console.log("adding an employee!");
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "first_name",
+            message: "What is the employee's first name?"
+        },
+        {
+            type: "input",
+            name: "last_name",
+            message: "What is the employee's last name?"
+        },
+        {
+            type: "input",
+            name: "role_id",
+            message: "What is the id for this employee's role?"
+        },
+        {
+            type: "input",
+            name: "manager_id",
+            message: "What is the id for this employee's manager"
+        }
+    ])
+    .then(function(answer) {
+        console.log(answer)
+    })
 };
 
 function viewDepartments() {
