@@ -81,7 +81,10 @@ function addDepartment() {
 
     .then(function(answer) {
         console.log(answer)
+        prompt()
     })
+
+   
 };
 
 function addRole(){
@@ -105,6 +108,7 @@ function addRole(){
 
     .then(function(answer) {
         console.log(answer)
+        prompt()
     })
 };
 
@@ -133,6 +137,7 @@ function addEmployee() {
     ])
     .then(function(answer) {
         console.log(answer)
+        prompt()
     })
 };
 
@@ -140,6 +145,7 @@ function viewDepartments() {
     connection.query(`SELECT * FROM departments`, function (err, res) {
         if (err) throw err;
         console.table(res)
+        prompt()
     })
 
 };
@@ -148,6 +154,7 @@ function viewRoles(){
     connection.query(`SELECT * FROM roles`, function (err, res) {
         if (err) throw err;
         console.table(res)
+        prompt()
     })
 };
 
@@ -155,6 +162,7 @@ function viewEmployees(){
     connection.query(`SELECT * FROM employees`, function (err, res) {
         if (err) throw err;
         console.table(res)
+        prompt()
     })
 };
 
