@@ -33,6 +33,7 @@ var connection = mysql.createConnection({
                     "View roles",
                     "View employees",
                     "Update employee roles",
+                    "Delete a department",
                     "Exit"]
             }])
         .then(function (answer) {
@@ -58,11 +59,14 @@ var connection = mysql.createConnection({
                 case ("Update employee roles"):
                     updateRole();
                     break;
+                case ("Delete a department"):
+                    deleteDepartment();
+                    break;
                 case ("Exit"):
                     connection.end();
                     break;
                 default:
-                    console.log("fubar")
+                    console.log("default")
                     break;
             }
         })
@@ -210,6 +214,20 @@ function updateRole(){
 
 function deleteDepartment(){
     // DELETE from employees where id = 1
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "delete_department",
+            message: "What is the name of the department that you would like to delete?"
+        }
+    ])
+    .then(function(answer) {
+        connection.query(`DELETE FROM departments WHERE department_name = "${answer.delete_department}"`, function(err,res) {
+            if (err) throw err;
+        }
+        )
+        prompt()
+    })
 
 };
 
