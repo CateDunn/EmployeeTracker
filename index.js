@@ -27,9 +27,7 @@ var connection = mysql.createConnection({
                 message: "What would you like to do",
                 choices: [
                     "Add",
-                    "View departments",
-                    "View roles",
-                    "View employees",
+                    "View",
                     "Update employee roles",
                     "Delete",
                     "Exit"]
@@ -39,14 +37,8 @@ var connection = mysql.createConnection({
                 case ("Add"):
                     addSomething();
                     break;
-                case ("View departments"):
-                    viewDepartments();
-                    break;
-                case ("View roles"):
-                    viewRoles();
-                    break;
-                case ("View employees"):
-                    viewEmployees();
+                case ("View"):
+                    viewSomething();
                     break;
                 case ("Update employee roles"):
                     updateRole();
@@ -65,6 +57,49 @@ var connection = mysql.createConnection({
 }
 
 prompt()
+
+function viewSomething(){
+    inquirer
+        .prompt([
+            {
+                type: "list",
+                name: "view",
+                message: "What would you like to view",
+                choices: [
+                    "departments",
+                    "roles",
+                    "employees",
+                    "Main Menu"]
+            }])
+        .then(function (answer) {
+            switch (answer.view) {
+                case ("departments"):
+                    connection.query(`SELECT * FROM departments`, function (err, res) {
+                        if (err) throw err;
+                        console.table(res)
+                        prompt()
+                    })
+                    break;
+                case ("roles"):
+                    connection.query(`SELECT * FROM roles`, function (err, res) {
+                        if (err) throw err;
+                        console.table(res)
+                        prompt()
+                    })
+                    break;
+                case ("employees"):
+                    connection.query(`SELECT * FROM employees`, function (err, res) {
+                        if (err) throw err;
+                        console.table(res)
+                        prompt()
+                    }) 
+                    break;
+                case ("Main Menu"):
+                    prompt();
+                    break;
+            }
+        })
+}
 
 function addSomething() {
     inquirer.prompt([
@@ -167,32 +202,6 @@ function addSomething() {
         }
     })
    
-};
-
-
-function viewDepartments() {
-    connection.query(`SELECT * FROM departments`, function (err, res) {
-        if (err) throw err;
-        console.table(res)
-        prompt()
-    })
-
-};
-
-function viewRoles(){
-    connection.query(`SELECT * FROM roles`, function (err, res) {
-        if (err) throw err;
-        console.table(res)
-        prompt()
-    })
-};
-
-function viewEmployees(){
-    connection.query(`SELECT * FROM employees`, function (err, res) {
-        if (err) throw err;
-        console.table(res)
-        prompt()
-    })
 };
 
 function updateRole(){
