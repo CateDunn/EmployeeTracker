@@ -17,4 +17,4 @@ VALUES ("Angela", "Smith", 100, 150);
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
 VALUES ("Elizabeth", "Johnson", 200, 250 );
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
-VALUES ("Mary", "Rogers", 300);
+VALUES ("Mary", "Rogers", 300, null);
