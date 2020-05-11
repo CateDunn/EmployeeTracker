@@ -1,0 +1,28 @@
+{
+  "name": "employeetracker",
+  "version": "1.0.0",
+  "description": "Allows users to track employees",
+  "main": "index.js",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^7.1.0",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "none"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CateDunn/EmployeeTracker.git"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "Cate Dunn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CateDunn/EmployeeTracker/issues"
+  },
+  "homepage": "https://github.com/CateDunn/EmployeeTracker#readme"
+}
