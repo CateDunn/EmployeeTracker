@@ -33,7 +33,7 @@ var connection = mysql.createConnection({
                     "View roles",
                     "View employees",
                     "Update employee roles",
-                    "Delete a department",
+                    "Delete",
                     "Exit"]
             }])
         .then(function (answer) {
@@ -59,8 +59,8 @@ var connection = mysql.createConnection({
                 case ("Update employee roles"):
                     updateRole();
                     break;
-                case ("Delete a department"):
-                    deleteDepartment();
+                case ("Delete"):
+                    deleteSomething();
                     break;
                 case ("Exit"):
                     connection.end();
@@ -212,22 +212,81 @@ function updateRole(){
     })
 };
 
-function deleteDepartment(){
+function deleteSomething(){
     // DELETE from employees where id = 1
     inquirer.prompt([
         {
-            type: "input",
-            name: "delete_department",
-            message: "What is the name of the department that you would like to delete?"
+            type: "list",
+            name: "delete",
+            message: "What would you like to delete?",
+            choices: [
+                "departments",
+                "roles",
+                "employees",
+                "Main Menu"
+                ]
         }
     ])
-    .then(function(answer) {
-        connection.query(`DELETE FROM departments WHERE department_name = "${answer.delete_department}"`, function(err,res) {
-            if (err) throw err;
+    .then(function (answer) {
+        switch (answer.delete) {
+            case ("departments"):
+                inquirer.prompt([
+                    {
+                        type: "input",
+                        name: "department_delete",
+                        message: "What is the name of the department that you would like to delete?"
+                    }  
+                ])
+                .then(function(answer) {
+                    connection.query(`DELETE FROM departments WHERE department_name = "${answer.department_delete}"`, function(err,res) {
+                        if (err) throw err;
+                    })
+                    console.log("Department successfully deleted!")
+                    prompt()
+                })
+                break;
+            case ("roles"):
+                inquirer.prompt([
+                    {
+                        type: "input",
+                        name: "role_delete",
+                        message: "What is the name of the role that you would like to delete?"
+                    }  
+                ])
+                .then(function(answer) {
+                    connection.query(`DELETE FROM roles WHERE title = "${answer.role_delete}"`, function(err,res) {
+                        if (err) throw err;
+                    })
+                    console.log("Role successfully deleted!")
+                    prompt()
+                })
+                break;
+            case ("employees"):
+                inquirer.prompt([
+                    {
+                        type: "input",
+                        name: "employee_delete",
+                        message: "What is the id of the employee that you would like to delete?"
+                    }
+                      
+                ])
+                .then(function(answer) {
+                    connection.query(`DELETE FROM employees WHERE id = ${answer.employee_delete}`, function(err,res) {
+                        if (err) throw err;
+                    })
+                    console.log("Employee successfully deleted!")
+                    prompt()
+                })
+                break;
+            case ("Exit"):
+                prompt();
+                break;
+            default:
+                console.log("default")
+                break;
         }
-        )
-        prompt()
     })
+   
 
 };
 
