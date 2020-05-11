@@ -26,25 +26,25 @@ var connection = mysql.createConnection({
                 name: "main",
                 message: "What would you like to do",
                 choices: [
-                    "Add",
                     "View",
-                    "Update employee roles",
+                    "Add",
                     "Delete",
+                    "Update employee roles",
                     "Exit"]
             }])
         .then(function (answer) {
             switch (answer.main) {
-                case ("Add"):
-                    addSomething();
-                    break;
                 case ("View"):
                     viewSomething();
                     break;
-                case ("Update employee roles"):
-                    updateRole();
+                case ("Add"):
+                    addSomething();
                     break;
                 case ("Delete"):
                     deleteSomething();
+                    break;
+                case ("Update employee roles"):
+                    updateRole();
                     break;
                 case ("Exit"):
                     connection.end();
@@ -204,39 +204,6 @@ function addSomething() {
    
 };
 
-function updateRole(){
-    inquirer.prompt([
-        {
-            type: "input",
-            name: "role_id",
-            message: "What is the id of the role that you would like to update?"
-        },
-        {
-            type: "input",
-            name: "newrole_title",
-            message: "What is the new title of the role?"
-        },
-        {
-            type: "input",
-            name: "newrole_salary",
-            message: "What is the new salary for the role?"
-        },
-        {
-            type: "input",
-            name: "newrole_department_id",
-            message: "What is the new id for the role?"
-        }
-
-    ])
-    .then(function(answer) {
-        connection.query(`UPDATE roles SET title = "${answer.newrole_title}", salary = ${answer.newrole_salary}, department_id = ${answer.newrole_department_id} WHERE id = ${answer.role_id};`, function(err,res) {
-            if (err) throw err;
-        }
-        )
-        prompt()
-    })
-};
-
 function deleteSomething(){
     inquirer.prompt([
         {
@@ -313,4 +280,39 @@ function deleteSomething(){
    
 
 };
+
+function updateRole(){
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "role_id",
+            message: "What is the id of the role that you would like to update?"
+        },
+        {
+            type: "input",
+            name: "newrole_title",
+            message: "What is the new title of the role?"
+        },
+        {
+            type: "input",
+            name: "newrole_salary",
+            message: "What is the new salary for the role?"
+        },
+        {
+            type: "input",
+            name: "newrole_department_id",
+            message: "What is the new id for the role?"
+        }
+
+    ])
+    .then(function(answer) {
+        connection.query(`UPDATE roles SET title = "${answer.newrole_title}", salary = ${answer.newrole_salary}, department_id = ${answer.newrole_department_id} WHERE id = ${answer.role_id};`, function(err,res) {
+            if (err) throw err;
+        }
+        )
+        prompt()
+    })
+};
+
+
 
