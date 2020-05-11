@@ -1,7 +1,7 @@
 # EmployeeTracker
 
 ## Description
-    This project allows users to...
+    This project allows users to keep track of employees. Users can add, delete or view departments, roles and employees. Users can also update employee roles.
 
 ## Installation
      This app requires inquirer, mysql, and console.table. Use the 'npm i' command to install.
